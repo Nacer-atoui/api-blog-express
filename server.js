@@ -3,11 +3,14 @@ const express = require("express");
 const app = express();
 
 require("./config/database");
-
+const categoryRouter = require('./routes/category.routes');
 const userRouter = require('./routes/user.routes'); 
+
 
 // Middleware pour lire le JSON
 app.use(express.json());
+
+
 
 // Route de test
 app.get("/health", (req, res) => {
@@ -16,6 +19,9 @@ app.get("/health", (req, res) => {
 
 // user
 app.use('/user', userRouter);
+
+// category
+app.use('/category', categoryRouter);
 
 // Démarrage du serveur
 const PORT = process.env.PORT || 3000;
