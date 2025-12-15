@@ -2,12 +2,12 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 
-const db = require("./config/database");
+require("./config/database");
+const categoryRouter = require('./routes/category.routes');
 
 // Middleware pour lire le JSON
 app.use(express.json());
 
-const categoryRouter = require('./routes/category.routes');
 
 app.use('/category', categoryRouter);
 
