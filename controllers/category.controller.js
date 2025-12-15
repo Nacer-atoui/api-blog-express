@@ -1,6 +1,6 @@
 const Category = require("../models/category.model");
 
-const getAllCategories = (req, res) => {
+const getAllCategory = (req, res) => {
     Category.findAll((error, results) => {
         if (error) {
             console.error("❌ Erreur lors de la requête SQL:", error.message);
@@ -13,5 +13,5 @@ const getAllCategories = (req, res) => {
 
 
 module.exports = {
-    getAllCategories,
+    getAllCategory,
 };

@@ -2,10 +2,14 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 
-require("./config/database");
+const db = require("./config/database");
 
 // Middleware pour lire le JSON
 app.use(express.json());
+
+const categoryRouter = require('./routes/category.routes');
+
+app.use('/category', categoryRouter);
 
 // Route de test
 app.get("/health", (req, res) => {
