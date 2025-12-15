@@ -27,6 +27,20 @@ const createUser = (req, res) => {
     });
 };
 
+/**
+ * Récupère tous les biens
+ */
+const getAllUser = (req, res) => {
+    User.findAll((error, results) => {
+        if (error) {
+            console.error('❌ Erreur lors de la requête SQL:', error.message);
+            return res.status(500).send('Erreur serveur lors de la récupération des biens.');
+        }
+        res.json(results);
+    });
+};
+
 module.exports = { 
-    createUser,   
+    createUser,
+    getAllUser   
 };
