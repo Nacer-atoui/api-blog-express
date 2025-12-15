@@ -2,6 +2,8 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 
+require("./config/database");
+
 // Middleware pour lire le JSON
 app.use(express.json());
 
