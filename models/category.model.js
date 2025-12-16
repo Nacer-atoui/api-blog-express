@@ -22,7 +22,12 @@ const createOne = (category, callback) => {
     ], callback);
 };
 
+const updateOne = (name, id, callback) => {
+  const sql = "UPDATE category SET name = ? WHERE id = ?";
+  db.query(sql, [name, id], callback);
+};
+
 // Ajouter autres requêtes du CRUD
 module.exports = {
-    findAll, findOne, createOne
+    findAll, findOne, createOne, updateOne
 };
