@@ -19,10 +19,15 @@ const deleteOne = (id, callback) => {
   const sql = `DELETE FROM article WHERE id = ?`;
   db.query(sql, [id], callback);
 };
+const update = (title, content, category_id, id, callback) => {
+  const sql = `UPDATE article SET title=?,content=?,category_id=? WHERE id = ?`;
+  db.query(sql, [title, content, category_id, id],callback);
+};
 
 module.exports = {
   findAll,
   findById,
   create,
   deleteOne,
+  update,
 };
