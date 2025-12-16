@@ -33,9 +33,19 @@ const getArticleById = (req, res) => {
     res.json(result);
   });
 };
-
+const deleteArticle = (req,res) => {
+    const { id } = req.params;
+    article.deleteOne(id,(error,result) =>{
+        if(error) {
+            console.error("erreur lors de la requete SQL:", error.message);
+            return res.status(500).send("Erreur serveur");
+        }
+        res.json(result);
+    } )
+}
 module.exports = {
   getAllArticles,
   getArticleById,
   createArticles,
+  deleteArticle,
 };
