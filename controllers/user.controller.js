@@ -15,12 +15,12 @@ const createUser = (req, res) => {
     User.create(userData, (error, results) => {
         if (error) {
             console.error('❌ Erreur lors de la requête SQL (Création):', error.message);
-            return res.status(500).send('Erreur serveur lors de la création du bien.');
+            return res.status(500).send('Erreur serveur lors de la création du user.');
         }
 
-        // Succès: Renvoie l'ID du bien créé
+        // Succès: Renvoie l'ID du user créé
         res.status(201).json({
-            message: "Bien créé avec succès.",
+            message: "User créé avec succès.",
             id: results.insertId,
             details: userData
         });
@@ -28,13 +28,13 @@ const createUser = (req, res) => {
 };
 
 /**
- * Récupère tous les biens
+ * Récupère tous les user
  */
 const getAllUser = (req, res) => {
     User.findAll((error, results) => {
         if (error) {
             console.error('❌ Erreur lors de la requête SQL:', error.message);
-            return res.status(500).send('Erreur serveur lors de la récupération des biens.');
+            return res.status(500).send('Erreur serveur lors de la récupération des user.');
         }
         res.json(results);
     });
@@ -90,9 +90,31 @@ const updateUser = (req, res) => {
     });
 };
 
+/**
+ * Supprime un user
+ * Route: DELETE /user/:id
+ */
+const deleteUser = (req, res) => {
+    const id = req.params.id;
+
+    User.remove(id, (error, results) => {
+        if (error) {
+            console.error('❌ Erreur lors de la suppression:', error.message);
+            return res.status(500).send('Erreur serveur lors de la suppression.');
+        }
+
+        if (results.affectedRows === 0) {
+            return res.status(404).json({ message: "Utilisateur non trouvé." });
+        }
+
+        res.json({ message: "Utilisateur supprimé avec succès." });
+    });
+};
+
 module.exports = { 
     createUser,
     getAllUser,
     getUserById,
-    updateUser
+    updateUser,
+    deleteUser
 };

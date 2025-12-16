@@ -68,10 +68,20 @@ const update = (id, userData, callback) => {
     db.query(sql, values, callback);
 };
 
+/**
+ * Supprime un user de la table 'user'.
+ * @param {number} id - L'ID du user à supprimer.
+ * @param {function} callback - Fonction de rappel.
+ */
+const remove = (id, callback) => {
+    const sql = 'DELETE FROM user WHERE id = ?';
+    db.query(sql, [id], callback);
+};
+
 module.exports = {
     create,
     findAll,
     findById,
-    update
-    // Autres fonctions 
+    update,
+    remove
 };
