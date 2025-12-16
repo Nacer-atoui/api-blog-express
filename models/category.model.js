@@ -10,7 +10,19 @@ const findOne = (id, callback) => {
     db.query(sql, [id], callback);
 };
 
+const createOne = (category, callback) => {
+    const sql = `
+        INSERT INTO category 
+        (name) 
+        VALUES (?)
+    `;
+
+    db.query(sql, [
+        category.name
+    ], callback);
+};
+
 // Ajouter autres requêtes du CRUD
 module.exports = {
-    findAll, findOne
+    findAll, findOne, createOne
 };
