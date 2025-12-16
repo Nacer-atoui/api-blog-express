@@ -15,9 +15,14 @@ const create = (title, content, category_id, callback) => {
     callback(error, result);
   });
 };
+const deleteOne = (id, callback) => {
+  const sql = `DELETE FROM article WHERE id = ?`;
+  db.query(sql, [id], callback);
+};
 
 module.exports = {
   findAll,
   findById,
   create,
+  deleteOne,
 };
