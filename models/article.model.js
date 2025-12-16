@@ -9,8 +9,15 @@ const findById = (id, callback) => {
   const sql = "SELECT * FROM article WHERE id=?";
   db.query(sql, [id], callback);
 };
+const create = (title, content, category_id, callback) => {
+  const sql = `INSERT INTO article(title,content,category_id) VALUES (?,?,?)`;
+  db.query(sql, [title, content, category_id], (error, result) => {
+    callback(error, result);
+  });
+};
 
 module.exports = {
   findAll,
   findById,
+  create,
 };
