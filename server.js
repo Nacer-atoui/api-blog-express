@@ -15,7 +15,7 @@ app.use(express.json());
 
 app.use("/articles", articleRoutes);
 
-// Route de test
+// Route de test salut
 app.get("/health", (req, res) => {
     res.json({ status: "ok" });
 });
