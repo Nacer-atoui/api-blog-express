@@ -4,7 +4,8 @@ const router = express.Router();
 const {
     createUser,
     getAllUser,
-    getUserById   
+    getUserById,
+    updateUser
 } = require("../controllers/user.controller"); 
 
 // POST /  Crée un nouveau user
@@ -15,5 +16,8 @@ router.get("/", getAllUser);
 
 // GET /:id  Récupère un user par son ID
 router.get("/:id", getUserById);
+
+// PUT /:id  Met à jour un user
+router.put("/:id", updateUser);
 
 module.exports = router;

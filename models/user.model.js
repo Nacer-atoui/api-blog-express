@@ -44,9 +44,34 @@ const findById = (id, callback) => {
     });
 };
 
+/**
+ * Met à jour un user existant.
+ * @param {number} id - L'ID du user à modifier.
+ * @param {object} userData - Les nouvelles données.
+ * @param {function} callback - Fonction de rappel.
+ */
+const update = (id, userData, callback) => {
+    const sql = `
+        UPDATE user 
+        SET firstname = ?, lastname = ?, email = ?, password = ? 
+        WHERE id = ?
+    `;
+    
+    const values = [
+        userData.firstname,
+        userData.lastname,
+        userData.email,
+        userData.password,
+        id
+    ];
+
+    db.query(sql, values, callback);
+};
+
 module.exports = {
     create,
     findAll,
-    findById
+    findById,
+    update
     // Autres fonctions 
 };
