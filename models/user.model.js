@@ -31,8 +31,57 @@ const create = (userData, callback) => {
     db.query(sql, values, callback);
 };
 
+/**
+ * Récupère un user par son ID.
+ * @param {number} id - L'identifiant du user.
+ * @param {function} callback - Fonction de rappel (error, results).
+ */
+const findById = (id, callback) => {
+    const sql = 'SELECT * FROM user WHERE id = ?';
+    db.query(sql, [id], (error, results) => {
+        // results est un tableau, on renvoie le premier élément s'il existe
+        callback(error, results[0]); 
+    });
+};
+
+/**
+ * Met à jour un user existant.
+ * @param {number} id - L'ID du user à modifier.
+ * @param {object} userData - Les nouvelles données.
+ * @param {function} callback - Fonction de rappel.
+ */
+const update = (id, userData, callback) => {
+    const sql = `
+        UPDATE user 
+        SET firstname = ?, lastname = ?, email = ?, password = ? 
+        WHERE id = ?
+    `;
+    
+    const values = [
+        userData.firstname,
+        userData.lastname,
+        userData.email,
+        userData.password,
+        id
+    ];
+
+    db.query(sql, values, callback);
+};
+
+/**
+ * Supprime un user de la table 'user'.
+ * @param {number} id - L'ID du user à supprimer.
+ * @param {function} callback - Fonction de rappel.
+ */
+const remove = (id, callback) => {
+    const sql = 'DELETE FROM user WHERE id = ?';
+    db.query(sql, [id], callback);
+};
+
 module.exports = {
     create,
-    findAll
-    // Autres fonctions 
+    findAll,
+    findById,
+    update,
+    remove
 };
