@@ -24,8 +24,28 @@ const getCategoryById = (req, res) => {
     });
 };
 
+const createCategory = (req, res) => {
+    const { name } = req.body;
+    const category = {
+        name
+    };
+
+    Category.createOne(category, (error, result) => {
+
+        if (error) {
+            console.error("❌ Erreur SQL:", error.message);
+            return res.status(500).send("Erreur serveur");
+        }
+
+        res.status(201).json({
+            id: result.insertId,
+            ...category
+        });
+    });
+};
+
 
 
 module.exports = {
-    getAllCategory, getCategoryById
+    getAllCategory, getCategoryById, createCategory
 };
