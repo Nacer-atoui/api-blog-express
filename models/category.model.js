@@ -5,8 +5,12 @@ const findAll = (callback) => {
     db.query(sql, callback);
 };
 
+const findOne = (id, callback) => {
+    const sql = "SELECT * FROM category WHERE id = ?";
+    db.query(sql, [id], callback);
+};
 
 // Ajouter autres requêtes du CRUD
 module.exports = {
-    findAll,
+    findAll, findOne
 };
