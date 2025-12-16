@@ -44,8 +44,22 @@ const createCategory = (req, res) => {
     });
 };
 
+const updateCategory = (req, res) => {
+    const { name } = req.body;
+    const { id } = req.params;
 
+    Category.updateOne(name, id, (error, result) => {
+        if (error) {
+            console.error("❌ Erreur lors de la requête SQL:", error.message);
+            return res.status(500).send("Erreur serveur");
+        }
+        if (result.affectedRows === 0) {
+            return res.status(404).send("Catégorie non trouvée");
+        }
+        res.json({ id: parseInt(id), name: name });
+    })
+}
 
 module.exports = {
-    getAllCategory, getCategoryById, createCategory
+    getAllCategory, getCategoryById, createCategory, updateCategory
 };
