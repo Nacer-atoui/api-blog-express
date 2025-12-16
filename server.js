@@ -1,19 +1,19 @@
 require("dotenv").config();
+require("./config/database");
+
 const express = require("express");
 const app = express();
 
-require("./config/database");
 
-// Middleware pour lire le JSON
 app.use(express.json());
 
-// Route de test
-app.get("/health", (req, res) => {
-    res.json({ status: "ok" });
-});
 
-// Démarrage du serveur
+const likeRoutes = require("./routes/like.routes");
+
+
+app.use("/like", likeRoutes);
+
+app.get("/health", (req, res) => res.json({ status: "ok" }));
+
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
