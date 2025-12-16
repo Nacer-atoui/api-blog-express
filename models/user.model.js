@@ -31,8 +31,22 @@ const create = (userData, callback) => {
     db.query(sql, values, callback);
 };
 
+/**
+ * Récupère un user par son ID.
+ * @param {number} id - L'identifiant du user.
+ * @param {function} callback - Fonction de rappel (error, results).
+ */
+const findById = (id, callback) => {
+    const sql = 'SELECT * FROM user WHERE id = ?';
+    db.query(sql, [id], (error, results) => {
+        // results est un tableau, on renvoie le premier élément s'il existe
+        callback(error, results[0]); 
+    });
+};
+
 module.exports = {
     create,
-    findAll
+    findAll,
+    findById
     // Autres fonctions 
 };

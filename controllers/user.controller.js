@@ -40,7 +40,30 @@ const getAllUser = (req, res) => {
     });
 };
 
+/**
+ * Récupère un user spécifique par son ID
+ * Route: GET /user/:id
+ */
+const getUserById = (req, res) => {
+    const id = req.params.id;
+
+    User.findById(id, (error, result) => {
+        if (error) {
+            console.error('❌ Erreur lors de la requête SQL:', error.message);
+            return res.status(500).send('Erreur serveur.');
+        }
+
+        // Si aucun utilisateur n'est trouvé
+        if (!result) {
+            return res.status(404).json({ message: "Utilisateur non trouvé." });
+        }
+
+        res.json(result);
+    });
+};
+
 module.exports = { 
     createUser,
-    getAllUser   
+    getAllUser,
+    getUserById
 };
