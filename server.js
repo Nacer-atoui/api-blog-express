@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express = require("express");
+const cors = require('cors');
 const app = express();
 const db = require("./config/database")
 const articleRoutes = require("./routes/article.routes")
@@ -7,6 +8,12 @@ const articleRoutes = require("./routes/article.routes")
 require("./config/database");
 const categoryRouter = require('./routes/category.routes');
 const userRouter = require('./routes/user.routes'); 
+
+app.use(cors({
+  origin: "http://localhost:5173",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
 
 
 // Middleware pour lire le JSON
