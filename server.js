@@ -3,6 +3,7 @@ const express = require("express");
 const cors = require('cors');
 const app = express();
 const db = require("./config/database")
+const authRoutes = require("./routes/auth.routes");
 const articleRoutes = require("./routes/article.routes")
 
 require("./config/database");
@@ -31,6 +32,9 @@ app.use('/user', userRouter);
 
 // category
 app.use('/category', categoryRouter);
+
+// Authentification
+app.use("/auth", authRoutes);
 
 // Démarrage du serveur
 const PORT = process.env.PORT || 3000;
