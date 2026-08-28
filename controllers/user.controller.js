@@ -9,13 +9,13 @@ const createUser = (req, res) => {
 
     // Validation simple 
     if (!userData.firstname || !userData.lastname || !userData.email || !userData.password) {
-        return res.status(400).send("Les champs 'firstname', 'lastname', 'email' et 'password' sont requis.");
+        return res.status(400).json("Les champs 'firstname', 'lastname', 'email' et 'password' sont requis.");
     }
 
     User.create(userData, (error, results) => {
         if (error) {
             console.error('❌ Erreur lors de la requête SQL (Création):', error.message);
-            return res.status(500).send('Erreur serveur lors de la création du user.');
+            return res.status(500).json('Erreur serveur lors de la création du user.');
         }
 
         // Succès: Renvoie l'ID du user créé
@@ -34,7 +34,7 @@ const getAllUser = (req, res) => {
     User.findAll((error, results) => {
         if (error) {
             console.error('❌ Erreur lors de la requête SQL:', error.message);
-            return res.status(500).send('Erreur serveur lors de la récupération des user.');
+            return res.status(500).json('Erreur serveur lors de la récupération des user.');
         }
         res.json(results);
     });
@@ -50,7 +50,7 @@ const getUserById = (req, res) => {
     User.findById(id, (error, result) => {
         if (error) {
             console.error('❌ Erreur lors de la requête SQL:', error.message);
-            return res.status(500).send('Erreur serveur.');
+            return res.status(500).json('Erreur serveur.');
         }
 
         // Si aucun utilisateur n'est trouvé
@@ -72,13 +72,13 @@ const updateUser = (req, res) => {
 
     // Validation simple
     if (!userData.firstname || !userData.lastname || !userData.email || !userData.password) {
-        return res.status(400).send("Tous les champs sont requis pour la mise à jour.");
+        return res.status(400).json("Tous les champs sont requis pour la mise à jour.");
     }
 
     User.update(id, userData, (error, results) => {
         if (error) {
             console.error('❌ Erreur lors de la mise à jour:', error.message);
-            return res.status(500).send('Erreur serveur.');
+            return res.status(500).json('Erreur serveur.');
         }
 
         // results.affectedRows indique si une ligne a été modifiée
@@ -100,7 +100,7 @@ const deleteUser = (req, res) => {
     User.remove(id, (error, results) => {
         if (error) {
             console.error('❌ Erreur lors de la suppression:', error.message);
-            return res.status(500).send('Erreur serveur lors de la suppression.');
+            return res.status(500).json('Erreur serveur lors de la suppression.');
         }
 
         if (results.affectedRows === 0) {

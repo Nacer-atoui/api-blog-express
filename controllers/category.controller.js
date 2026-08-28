@@ -4,7 +4,7 @@ const getAllCategory = (req, res) => {
     Category.findAll((error, results) => {
         if (error) {
             console.error("❌ Erreur lors de la requête SQL:", error.message);
-            return res.status(500).send("Erreur serveur");
+            return res.status(500).json("Erreur serveur");
         }
         res.json(results);
     });
@@ -15,10 +15,10 @@ const getCategoryById = (req, res) => {
     Category.findOne(id, (error, result) => {
         if (error) {
             console.error("❌ Erreur SQL:", error.message);
-            return res.status(500).send("Erreur serveur");
+            return res.status(500).json("Erreur serveur");
         }
         if (!result || result.length === 0) {
-            return res.status(404).send("Article non trouvé");
+            return res.status(404).json("Article non trouvé");
         }
         res.json(result[0]); // renvoyer un seul article
     });
@@ -34,7 +34,7 @@ const createCategory = (req, res) => {
 
         if (error) {
             console.error("❌ Erreur SQL:", error.message);
-            return res.status(500).send("Erreur serveur");
+            return res.status(500).json("Erreur serveur");
         }
 
         res.status(201).json({
@@ -51,10 +51,10 @@ const updateCategory = (req, res) => {
     Category.updateOne(name, id, (error, result) => {
         if (error) {
             console.error("❌ Erreur lors de la requête SQL:", error.message);
-            return res.status(500).send("Erreur serveur");
+            return res.status(500).json("Erreur serveur");
         }
         if (result.affectedRows === 0) {
-            return res.status(404).send("Catégorie non trouvée");
+            return res.status(404).json("Catégorie non trouvée");
         }
         res.json({ id: parseInt(id), name: name });
     })
@@ -66,10 +66,10 @@ const deleteCategory = (req, res) => {
     Category.deleteOne( id, (error, result) => {
         if (error) {
             console.error("❌ Erreur lors de la requête SQL:", error.message);
-            return res.status(500).send("Erreur serveur");
+            return res.status(500).json("Erreur serveur");
         }
         if (result.affectedRows === 0) {
-            return res.status(404).send("Catégorie non trouvée");
+            return res.status(404).json("Catégorie non trouvée");
         }
         res.json({ id: parseInt(id) });
     })

@@ -11,7 +11,7 @@ const categoryRouter = require('./routes/category.routes');
 const userRouter = require('./routes/user.routes'); 
 
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: process.env.FRONTEND_URL || "http://localhost:8080",
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));

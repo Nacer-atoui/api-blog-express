@@ -5,7 +5,7 @@ const db = require('../config/database');
  * @param {function} callback - Fonction de rappel (error, results).
  */
 const findAll = (callback) => {
-    const sql = 'SELECT * FROM user';
+    const sql = 'SELECT * FROM users';
     db.query(sql, callback);
 };
 
@@ -16,7 +16,7 @@ const findAll = (callback) => {
  */
 const create = (userData, callback) => {
     const sql = `
-        INSERT INTO user 
+        INSERT INTO users 
         (firstname, lastname, email, password) 
         VALUES (?, ?, ?, ?)
     `;
@@ -37,7 +37,7 @@ const create = (userData, callback) => {
  * @param {function} callback - Fonction de rappel (error, results).
  */
 const findById = (id, callback) => {
-    const sql = 'SELECT * FROM user WHERE id = ?';
+    const sql = 'SELECT * FROM users WHERE id = ?';
     db.query(sql, [id], (error, results) => {
         // results est un tableau, on renvoie le premier élément s'il existe
         callback(error, results[0]); 
@@ -52,7 +52,7 @@ const findById = (id, callback) => {
  */
 const update = (id, userData, callback) => {
     const sql = `
-        UPDATE user 
+        UPDATE users 
         SET firstname = ?, lastname = ?, email = ?, password = ? 
         WHERE id = ?
     `;
@@ -74,7 +74,7 @@ const update = (id, userData, callback) => {
  * @param {function} callback - Fonction de rappel.
  */
 const remove = (id, callback) => {
-    const sql = 'DELETE FROM user WHERE id = ?';
+    const sql = 'DELETE FROM users WHERE id = ?';
     db.query(sql, [id], callback);
 };
 
